@@ -1,0 +1,40 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+<body>
+Welcome
+
+<script>
+    function createTable(tableData) {
+        var table = document.createElement('table');
+        var tableBody = document.createElement('tbody');
+
+        tableData.forEach(function(rowData) {
+            var row = document.createElement('tr');
+
+            var name = document.createElement('td');
+            name.appendChild(document.createTextNode(rowData.firstName + " " + rowData.secondName));
+            row.appendChild(name);
+
+            tableBody.appendChild(row);
+        });
+
+        table.appendChild(tableBody);
+        document.body.appendChild(table);
+    }
+
+    $.ajax({
+               url: 'http://localhost:8080/contacts',
+               success: function (response) {
+                   var contacts = response._embedded.contacts;
+                   console.log(contacts);
+                   createTable(contacts);
+               },
+               error: function (response) {
+                   console.log('server error');
+               }
+           })
+</script>
+</body>
+</html>
