@@ -60,7 +60,7 @@ pipeline() {
     success {
       script {
         dir("${env.WORKSPACE}") {
-          archiveArtifacts '*/target/*.jar'
+          archiveArtifacts 'target/*.jar'
         }
         echo ("BUILD SUCCESS: Job ${env.JOB_NAME} [${env.BUILD_NUMBER}]\nCheck console output at: ${env.BUILD_URL}")
       }
