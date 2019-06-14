@@ -42,7 +42,7 @@ pipeline() {
       steps {
         script {
           rtMaven.deployer.deployArtifacts = true
-          rtMaven.deployer server: server, snapshotRepo: 'ibanadiga'
+          rtMaven.deployer server: server, snapshotRepo: 'ibanadiga-snapshots'
           info = rtMaven.run pom: 'pom.xml', goals: 'install'
           buildInfo.append(info)
         }
