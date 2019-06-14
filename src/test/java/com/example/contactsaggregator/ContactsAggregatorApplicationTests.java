@@ -12,5 +12,4 @@ public class ContactsAggregatorApplicationTests {
   @Test
   public void contextLoads() {
   }
-
 }
