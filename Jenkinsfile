@@ -52,8 +52,10 @@ pipeline() {
 
   post {
     always {
+      script {
         server.publishBuildInfo buildInfo
       }
+    }
 
     success {
       script {
