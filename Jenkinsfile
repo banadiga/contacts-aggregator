@@ -54,7 +54,6 @@ pipeline() {
     always {
         server.publishBuildInfo buildInfo
       }
-    }
 
     success {
       script {
