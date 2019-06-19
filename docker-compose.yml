@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+ 
+  #
+  contacts-aggregator:
+    image: contacts-aggregator/contacts-aggregator
+    restart: on-failure
+    ports:
+      - 80:8080
