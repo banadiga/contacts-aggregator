@@ -87,7 +87,7 @@
                 <resource>
                   <targetPath>/</targetPath>
                   <directory>${project.build.directory}</directory>
-                  <include>contacts-aggregator*.jar</include>
+                  <include>${project.artifactId}*.jar</include>
                 </resource>
               </resources>
             </configuration>
