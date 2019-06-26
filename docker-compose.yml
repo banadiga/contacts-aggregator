@@ -1,0 +1,30 @@
+version: '3.7'
+
+services:
+ 
+ #
+  apigateway:
+    image: contacts-aggregator/apigateway
+    restart: on-failure
+    ports:
+      - 80:8080
+    links:
+      - contacts-aggregator
+      - ui
+    environment:
+      - MONOLIT=http://contacts-aggregator:8080/
+      - UI=http://ui:8080/
+
+  #
+  contacts-aggregator:
+    image: contacts-aggregator/contacts-aggregator
+    restart: on-failure
+    ports:
+      - 8080
+
+  #
+  ui:
+    image: contacts-aggregator/ui
+    restart: on-failure
+    ports:
+      - 8080
