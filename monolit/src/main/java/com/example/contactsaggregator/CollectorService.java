@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import com.example.contactsaggregator.contact.Contact;
 import com.example.contactsaggregator.contact.ContactService;
 import com.example.contactsaggregator.contact.Email;
+import com.example.contactsaggregator.contact.Phone;
 import com.example.contactsaggregator.rawdata.RawData;
 import com.example.contactsaggregator.rawdata.RawDataService;
 
@@ -27,28 +28,32 @@ public class CollectorService {
     return Email.builder().email(email).build();
   }
 
+  private static Phone toPhone(String phone) {
+    return Phone.builder().phone(phone).build();
+  }
+
   private static List<Email> toEmails(Collection<String> emails) {
     return emails.stream().map(CollectorService::toEmail).collect(Collectors.toList());
+  }
+
+  private static List<Phone> toPhone(Collection<String> emails) {
+    return emails.stream().map(CollectorService::toPhone).collect(Collectors.toList());
   }
 
   @Scheduled(fixedDelay = 1000)
   public void migrate() {
     List<RawData> data = rawDataService.getNewData();
 
-    migrate(data);
-
-    rawDataService.markAsMigrated(data);
-  }
-
-  private void migrate(List<RawData> data) {
     List<Contact> contacts = data.stream()
         .map(this::getContact)
         .collect(Collectors.toList());
     contactService.saveAll(contacts);
+
+    rawDataService.markAsMigrated(data);
   }
 
   private Contact getContact(RawData data) {
-    Optional<Contact> containing = contactService.findByEmailsContaining(data.getEmails());
+    Optional<Contact> containing = contactService.findBy(data.getEmails(), data.getPhones());
 
     containing.ifPresent(contact -> {
       List<String> currentEmails = contact.getEmails().stream()
@@ -67,6 +72,7 @@ public class CollectorService {
         .firstName(data.getFirstName())
         .secondName(data.getSecondName())
         .emails(toEmails(data.getEmails()))
+        .phones(toPhone(data.getPhones()))
         .build());
   }
 }

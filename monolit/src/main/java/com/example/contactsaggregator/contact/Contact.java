@@ -41,4 +41,12 @@ public class Contact {
       orphanRemoval = true
   )
   private List<Email> emails = new ArrayList<>();
+
+  @Singular
+  @OneToMany(
+      fetch = FetchType.EAGER,
+      cascade = CascadeType.ALL,
+      orphanRemoval = true
+  )
+  private List<Phone> phones = new ArrayList<>();
 }

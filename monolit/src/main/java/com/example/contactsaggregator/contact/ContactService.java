@@ -28,11 +28,15 @@ public class ContactService {
     contactRepository.save(contact);
   }
 
-  public Optional<Contact> findByEmailsContaining(Collection<String> emails) {
+  public Optional<Contact> findBy(Collection<String> emails, Collection<String> phones) {
     return contactRepository.findAll().stream()
-        .filter(contact -> !Collections.disjoint(
-            contact.getEmails().stream().map(Email::getEmail).collect(Collectors.toList()),
-            emails))
+        .filter(contact ->
+            !Collections.disjoint(
+                contact.getEmails().stream().map(Email::getEmail).collect(Collectors.toList()),
+                emails) ||
+            !Collections.disjoint(
+                contact.getPhones().stream().map(Phone::getPhone).collect(Collectors.toList()),
+                phones))
         .findFirst();
   }
 
