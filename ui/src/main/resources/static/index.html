@@ -25,7 +25,7 @@ Welcome
     }
 
     $.ajax({
-               url: 'http://localhost:8080/contacts',
+               url: '/contacts',
                success: function (response) {
                    var contacts = response._embedded.contacts;
                    console.log(contacts);
