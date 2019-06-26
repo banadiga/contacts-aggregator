@@ -72,7 +72,7 @@ public class CollectorService {
         .firstName(data.getFirstName())
         .secondName(data.getSecondName())
         .emails(toEmails(data.getEmails()))
-        .phones(toPhone(data.getPhones()))
+//        .phones(toPhone(data.getPhones()))
         .build());
   }
 }

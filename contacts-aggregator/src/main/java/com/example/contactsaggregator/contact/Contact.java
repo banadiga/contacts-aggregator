@@ -6,8 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Singular;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,7 +45,7 @@ public class Contact {
       cascade = CascadeType.ALL,
       orphanRemoval = true
   )
-  private List<Email> emails = new ArrayList<>();
+  private Set<Email> emails = new HashSet<>();
 
   @Singular
   @OneToMany(
@@ -48,5 +53,5 @@ public class Contact {
       cascade = CascadeType.ALL,
       orphanRemoval = true
   )
-  private List<Phone> phones = new ArrayList<>();
+  private Set<Phone> phones = new HashSet<>();
 }

@@ -12,7 +12,7 @@
   <description>Spring cloud application</description>
 
   <modules>
-    <module>monolit</module>
+    <module>contacts-aggregator</module>
     <module>ui</module>
     <module>apigateway</module>
   </modules>
